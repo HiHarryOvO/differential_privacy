@@ -26,15 +26,13 @@ def duchi_method(tp, epsilon):
     d = len(tp)
     if d % 2 != 0:
         C_d = 2 ** (d - 1)
-        B = (2 ** d + C_d * (math.exp(epsilon) - 1)) / (comb(d - 1, (d - 1) / 2) * (math.exp(epsilon) - 1))
+        B = (2 ** d + C_d * (math.exp(epsilon) - 1)) / (comb(d - 1, int((d - 1) / 2)) * (math.exp(epsilon) - 1))
     else:
-        C_d = 2 ** (d - 1) - comb(d, d / 2)
-        B = (2 ** d + C_d * (math.exp(epsilon) - 1)) / (comb(d - 1, d / 2) * (math.exp(epsilon) - 1))
+        C_d = 2 ** (d - 1) - comb(d, int(d / 2))
+        B = (2 ** d + C_d * (math.exp(epsilon) - 1)) / (comb(d - 1, int(d / 2)) * (math.exp(epsilon) - 1))
 
     neg_B = (-1) * B
     v = [generate_binary_random(0.5 + 0.5 * tp[j], 1, -1) for j in range(d)]
-    for j in range(d):
-        v[j] = generate_binary_random(0.5 + 0.5 * tp[j], 1, -1)
 
     t_pos = []
     t_neg = []
